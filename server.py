@@ -1,9 +1,11 @@
 import config
+import openai
 import os
+from pprint import pprint
 from flask import Flask, request
 import requests
 
-
+openai.api_key = os.environ["OPENAI_API_KEY"]
 app = Flask(__name__)
 
 @app.route("/")
@@ -13,6 +15,7 @@ def hello_world():
 @app.post("/api/bot")
 def bot():
     data = request.get_json()
+    pprint(data)
     if data["sender_type"] != "user":
         return 
 
